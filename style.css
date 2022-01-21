@@ -1,0 +1,79 @@
+body{
+    background-color:rgb(159, 174, 175);
+}
+
+.selectplayers{
+    color: rgb(0, 0, 0);
+
+}
+
+.amountbutton{
+    display:inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: aliceblue;
+}
+
+.main{
+    color: rgb(0, 0, 0);
+}
+
+.ui{
+    margin-top: 4px;
+}
+
+.roll{
+    display:inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url('img/dice6.png');
+}
+
+.playerturn{
+    display: inline-block;
+    background-color: rgb(204, 204, 204);
+    width: 50px;
+    height: 20px;
+}
+
+.boardoverlay{
+    top: 0px;
+    position: absolute;
+    background-image: url('img/snakes.png');
+    width: 600px;
+    height: 600px;
+}
+
+.pawn{
+    position: absolute;
+    top: 0px;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+    display:none;
+}
+
+
+.pawn0{
+    background-image: url('img/pawn0.png');
+}
+
+.pawn1{
+    background-image: url('img/pawn1.png');
+}
+
+.pawn2{
+    background-image: url('img/pawn2.png');
+}
+
+.pawn3{
+    background-image: url('img/pawn3.png');
+}
+
+.tile{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(163, 235, 248);
+    color: black;
+}
