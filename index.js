@@ -1,4 +1,14 @@
-class player
+let game;
+
+function init(){
+    game = new Game();
+}
+
+
+
+
+
+class Player
 {
     constructor(index)
     {
@@ -11,7 +21,7 @@ class player
     }
 }
 
-class title
+class Tile
 {
     constructor(div)
     {
@@ -33,9 +43,9 @@ class Game
         this.boardDiv = document.getElementsByClassName ("board")[0];
         this.boardoverlayDiv = document.getElementsByClassName ("selectpalyers")[0];
 
-        this.title = [];
-        this.player = [];
-        this.payerturn = [0];
+        this.tiles = [];
+        this.players = [];
+        this.playerturn = 0;
         this.setupBoard();
 
            
@@ -67,43 +77,96 @@ class Game
                 //left
                 x--;
             }
-            else if (cmd == 1)
+            else if (cmd == 0)
             {
                 //up
-                x--;
+                y--;
             }
 
             let div = this.makeBoardDiv(x * tileSize, y * tileSize, i + 1)
 
-            let tile = new tile(div);
-            this.tile.push(tile);
+            let tile = new Tile(div);
+            this.tiles.push(tile);
         }
+
+        this.setupGotos();
     }
     setupGotos()
     {
+    
+        let goto = [[6, 14], [16, 4], [17, 23], [27, 33], [29, 10], [38, 43], [39, 20], [45, 34]];
+
+
+        for (var i = 0; i < goto.length; i++)
+        {
+            let element = goto[0]
+
+            let start = element[0] - 1;
+            let end = element[1] - 1;
+
+            let tile = this.tiles[start]
+            tile.goto = end;
+        }
+        
 
     }
-    start()
+    start(amountOfPlayers)
     {
+        this.selectplayersDiv.style.display = "none"
+        this.winnerDiv.style.display = "none"
+        this.mainDiv.style.display = "none"
+        
+        let pawns = document.getElementsByClassName("pawn");
 
+        for (var i = 0; i < pawns.length; i++)
+        {
+            pawns[i].style.display = "none"
+        }
+
+        this.players = [];
+
+        for (var i = 0; i < amountOfPlayers; i++)
+        {
+            let player = new Player(i);
+
+            this.players.push(player);
+        }
+
+        this.playerturn = -1;
+        this.moveToNextPlayer();
     }
     moveToNextPlayer()
     {
+        this.playerturn++;
+        if (this.playerturn == this.players.length)
+        {
+            this.playerturn = 0;
+        }
 
+        this.draw();
     }
     draw()
     {
-
+        for (var i = 0; i < this.players.length; i++)
+        {
+            this.setPawn(i, this.players[i].atTile);         
+        }     
     }
     roll()
     {
-
+           
     }
     setPawn(playerI, attile)
     {
+        let tile = this.tiles[atTile];
 
+        let player = this.players[playersI]
+
+        player.pawn.style.left = tile.div.style.left;
+
+        player.pawn.style.top = tile.div.style.top; 
     }
-    letmakeBoardDiv(x, y, titleDisplayNumber)
+    makeBoardDiv(x, y, titleDisplayNumber)
     {
         let div = document.createElement("div");
 
